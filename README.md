@@ -2,10 +2,10 @@
 
 Software Engineering student building full-stack, AI, and WordPress-powered applications — with Python as my core language.
 
-- 🔭 **Currently building:** [one-line description of your capstone project]
+- 🔭 **Currently building:** expanding my portfolio with full-stack, AI, and WordPress projects
 - 🌱 **Learning:** Django/FastAPI, WordPress plugin architecture, applied ML
 - 🎯 **Looking for:** Software Engineering internships (Full-Stack / Python / AI)
-- 📫 **Reach me:** mubeenzaman404@gmail.com · [LinkedIn](#) · [Portfolio](#)
+- 📫 **Reach me:** mubeenzaman404@gmail.com · www.linkedin.com/in/mubeenkhan09
 
 ---
 
@@ -47,5 +47,4 @@ Software Engineering student building full-stack, AI, and WordPress-powered appl
 ## 📫 Contact
 
 - Email: mubeenzaman404@gmail.com
-- LinkedIn: [add link]
-- Portfolio: [add link]
+- LinkedIn: www.linkedin.com/in/mubeenkhan09
