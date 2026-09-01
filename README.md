@@ -21,7 +21,6 @@ Software Engineering student building full-stack, AI, and WordPress-powered appl
 ![Pandas](https://img.shields.io/badge/pandas-150458?style=flat&logo=pandas&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
 
-*(Edit this list to match what you actually use — don't badge a tool you can't speak to in an interview.)*
 
 ---
 
@@ -32,7 +31,6 @@ Software Engineering student building full-stack, AI, and WordPress-powered appl
 | **[AI Stock Prediction](#)** | ML model forecasting stock trends without external APIs — includes backtested accuracy metrics | Python, pandas, scikit-learn |
 
 
-*(Replace with your real repo links once the cleanup + new builds are done. Keep to 3–6 — quality over quantity.)*
 
 ---
 
