@@ -30,8 +30,7 @@ Software Engineering student building full-stack, AI, and WordPress-powered appl
 | Project | What it does | Stack |
 |---|---|---|
 | **[AI Stock Prediction](#)** | ML model forecasting stock trends without external APIs — includes backtested accuracy metrics | Python, pandas, scikit-learn |
-| **[Project name]** | One sentence: the problem it solves and for whom | Django, PostgreSQL, React |
-| **[Project name]** | One sentence: what it does | WordPress, PHP |
+
 
 *(Replace with your real repo links once the cleanup + new builds are done. Keep to 3–6 — quality over quantity.)*
 
