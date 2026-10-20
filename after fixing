@@ -1,0 +1,215 @@
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <limits>
+#include <iomanip>
+#include <algorithm>
+#include <cctype>
+
+using namespace std;
+
+const double GRADE_A = 80.0;
+const double GRADE_B = 70.0;
+const double GRADE_C = 60.0;
+const double GRADE_D = 50.0;
+const int SUBJECT_COUNT = 3;
+const int MIN_MARKS = 0;
+const int MAX_MARKS = 100;
+
+class Student {
+public:
+    string name;
+    int age;
+    vector<int> marks;
+
+    Student(const string& studentName, int studentAge,
+            const vector<int>& studentMarks)
+        : name(studentName), age(studentAge), marks(studentMarks) {}
+};
+
+vector<Student> students;
+
+int readInteger(const string& prompt, int minimum, int maximum) {
+    int value;
+
+    while (true) {
+        cout << prompt;
+
+        if (cin >> value && value >= minimum && value <= maximum) {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            return value;
+        }
+
+        cout << "Invalid input. Enter a number between "
+             << minimum << " and " << maximum << ".\n";
+
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
+
+string readName(const string& prompt) {
+    string name;
+
+    while (true) {
+        cout << prompt;
+        getline(cin, name);
+
+        if (name.find_first_not_of(" \t") != string::npos) {
+            return name;
+        }
+
+        cout << "Name cannot be empty. Try again.\n";
+    }
+}
+
+double calculateAverage(const Student& student) {
+    int total = 0;
+
+    for (int mark : student.marks) {
+        total += mark;
+    }
+
+    return static_cast<double>(total) / student.marks.size();
+}
+
+char calculateGrade(double average) {
+    if (average >= GRADE_A) return 'A';
+    if (average >= GRADE_B) return 'B';
+    if (average >= GRADE_C) return 'C';
+    if (average >= GRADE_D) return 'D';
+
+    return 'F';
+}
+
+void displayStudent(const Student& student) {
+    cout << "\nName: " << student.name << '\n';
+    cout << "Age: " << student.age << '\n';
+    cout << "Marks: ";
+
+    for (int mark : student.marks) {
+        cout << mark << " ";
+    }
+
+    double average = calculateAverage(student);
+
+    cout << "\nAverage: " << fixed << setprecision(2)
+         << average << '\n';
+    cout << "Grade: " << calculateGrade(average) << '\n';
+}
+
+void addStudent() {
+    string studentName = readName("Enter student name: ");
+    int studentAge = readInteger("Enter age (1-120): ", 1, 120);
+
+    vector<int> studentMarks;
+
+    for (int i = 0; i < SUBJECT_COUNT; ++i) {
+        studentMarks.push_back(
+            readInteger("Enter marks for subject " +
+                        to_string(i + 1) + " (0-100): ",
+                        MIN_MARKS, MAX_MARKS)
+        );
+    }
+
+    students.emplace_back(studentName, studentAge, studentMarks);
+    cout << "Student added successfully!\n";
+}
+
+void displayAllStudents() {
+    if (students.empty()) {
+        cout << "No students available.\n";
+        return;
+    }
+
+    for (const Student& student : students) {
+        displayStudent(student);
+    }
+}
+
+string normalizeName(string name) {
+    transform(name.begin(), name.end(), name.begin(),
+              [](unsigned char character) {
+                  return static_cast<char>(tolower(character));
+              });
+
+    return name;
+}
+
+void searchStudent() {
+    string searchName = readName("Enter student name to search: ");
+    string normalizedSearch = normalizeName(searchName);
+
+    for (const Student& student : students) {
+        if (normalizeName(student.name) == normalizedSearch) {
+            cout << "Student found!\n";
+            displayStudent(student);
+            return;
+        }
+    }
+
+    cout << "Student not found.\n";
+}
+
+void findHighestMarks() {
+    if (students.empty()) {
+        cout << "No students available. Add a student first.\n";
+        return;
+    }
+
+    const Student* highestStudent = &students.front();
+
+    for (const Student& student : students) {
+        if (calculateAverage(student) >
+            calculateAverage(*highestStudent)) {
+            highestStudent = &student;
+        }
+    }
+
+    cout << "Student with the highest average marks:\n";
+    displayStudent(*highestStudent);
+}
+
+void showMenu() {
+    cout << "\n===== Student Management System =====\n";
+    cout << "1. Add Student\n";
+    cout << "2. Display All Students\n";
+    cout << "3. Search Student\n";
+    cout << "4. Find Highest Average Marks\n";
+    cout << "5. Exit\n";
+}
+
+void menu() {
+    bool running = true;
+
+    while (running) {
+        showMenu();
+
+        int choice = readInteger("Enter choice (1-5): ", 1, 5);
+
+        switch (choice) {
+            case 1:
+                addStudent();
+                break;
+            case 2:
+                displayAllStudents();
+                break;
+            case 3:
+                searchStudent();
+                break;
+            case 4:
+                findHighestMarks();
+                break;
+            case 5:
+                running = false;
+                cout << "Program exited successfully.\n";
+                break;
+        }
+    }
+}
+
+int main() {
+    menu();
+    return 0;
+}
