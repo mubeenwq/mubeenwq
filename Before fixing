@@ -1,0 +1,137 @@
+
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+class Student {
+public:
+    string name;
+    int age;
+    int m1, m2, m3;
+
+    Student(string n, int a, int x, int y, int z) {
+        name = n;
+        age = a;
+        m1 = x;
+        m2 = y;
+        m3 = z;
+    }
+};
+
+vector<Student> students;
+
+void addStudent() {
+    string n;
+    int a, x, y, z;
+    int unusedVariable = 100;
+
+    cout << "Enter student name: ";
+    cin >> n;
+
+    cout << "Enter age: ";
+    cin >> a;
+
+    cout << "Enter marks for three subjects: ";
+    cin >> x >> y >> z;
+
+    students.push_back(Student(n, a, x, y, z));
+    cout << "Student added successfully!\n";
+}
+
+double calculateAverage(Student s) {
+    return (s.m1 + s.m2 + s.m3) / 3.0;
+}
+
+void displayStudent(Student s) {
+    cout << "\nName: " << s.name;
+    cout << "\nAge: " << s.age;
+    cout << "\nMarks: " << s.m1 << ", " << s.m2 << ", " << s.m3;
+    cout << "\nAverage: " << calculateAverage(s);
+
+    if (calculateAverage(s) >= 80)
+        cout << "\nGrade: A";
+    else if (calculateAverage(s) >= 70)
+        cout << "\nGrade: B";
+    else if (calculateAverage(s) >= 60)
+        cout << "\nGrade: C";
+    else if (calculateAverage(s) >= 50)
+        cout << "\nGrade: D";
+    else
+        cout << "\nGrade: F";
+
+    cout << "\n";
+}
+
+void searchStudent() {
+    string n;
+    cout << "Enter student name to search: ";
+    cin >> n;
+
+    for (int i = 0; i < students.size(); i++) {
+        if (students[i].name == n) {
+            cout << "Student found!\n";
+            cout << "Name: " << students[i].name << "\n";
+            cout << "Age: " << students[i].age << "\n";
+            cout << "Marks: " << students[i].m1 << "\n";
+            cout << "Marks: " << students[i].m2 << "\n";
+            cout << "Marks: " << students[i].m3 << "\n";
+            displayStudent(students[i]);
+            return;
+        }
+    }
+
+    cout << "Student not found.\n";
+}
+
+void findHighest() {
+    Student highest = students[0];
+
+    for (int i = 0; i < students.size(); i++) {
+        if (students[i].m1 > highest.m1)
+            highest = students[i];
+        if (students[i].m2 > highest.m2)
+            highest = students[i];
+        if (students[i].m3 > highest.m3)
+            highest = students[i];
+    }
+
+    cout << "Student with highest marks:\n";
+    displayStudent(highest);
+}
+
+void menu() {
+    int choice;
+
+    while (true) {
+        cout << "\n===== Student Management System =====\n";
+        cout << "1. Add Student\n";
+        cout << "2. Display All Students\n";
+        cout << "3. Search Student\n";
+        cout << "4. Find Highest Marks\n";
+        cout << "5. Exit\n";
+        cout << "Enter choice: ";
+
+        cin >> choice;
+
+        if (choice == 1)
+            addStudent();
+        else if (choice == 2) {
+            for (int i = 0; i < students.size(); i++)
+                displayStudent(students[i]);
+        }
+        else if (choice == 3)
+            searchStudent();
+        else if (choice == 4)
+            findHighest();
+        else if (choice == 5)
+            break;
+        else
+            cout << "Invalid choice!\n";
+    }
+}
+
+int main() {
+    menu();
+    return 0;
+}
